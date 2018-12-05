@@ -1,0 +1,7 @@
+.loader-container {
+    animation: loader-spiner infinite 20s linear;
+}
+@keyframes loader-spiner {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
