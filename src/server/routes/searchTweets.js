@@ -12,19 +12,14 @@ module.exports = (app, io) => {
     let twitterStream = null;
 
 
-    /**
-     * Resumes twitter stream.
-     */
     const stream = (search) => {
         twitter.stream('statuses/filter', { track: search }, (stream) => {
             stream.on('data', (tweet) => {
                 sendMessage(tweet);
             });
-
             stream.on('error', (error) => {
                 console.log(error);
             });
-
             twitterStream = stream;
         });
     }

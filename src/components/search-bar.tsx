@@ -16,7 +16,7 @@ class SearchBar extends React.Component<Iprops, Istate> {
         this.handleChange = this.handleChange.bind(this);
         this.state = { 
             searchText: "", 
-            placeholder: "Search your favorite pokemon by name or id",
+            placeholder: "Search your favorite pokemon by name",
             lockSearch: false,
         }
     }
