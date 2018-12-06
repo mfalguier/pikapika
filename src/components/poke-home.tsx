@@ -31,7 +31,6 @@ export class PokeHome extends React.Component<{}, Istate> {
         }
     }
     componentDidMount() {
-
         axios(`${conf.API.END_POINT}/pokemon/`).then((response) => {
             this.pokeList = response.data.results;
         }).catch((error) => {

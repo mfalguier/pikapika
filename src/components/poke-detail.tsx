@@ -21,19 +21,13 @@ interface Istate {
 export class PokeDetail extends React.Component<Iprops, Istate> {
     constructor(props: any) {
         super(props);
-        this.getPokeTweet = this.getPokeTweet.bind(this);
+        //this.getPokeTweet = this.getPokeTweet.bind(this);
         this.state = {
             isLoading: false,
             pokeData: null,
             liveTweetList: [],
             isInError: false
         }
-    }
-
-    getPokeTweet() {
-        if(this.props.match.params.name){
-            axios.post('/setPokeSearch', {search : this.props.match.params.name});
-        }   
     }
 
     componentWillUnmount(){
@@ -46,7 +40,7 @@ export class PokeDetail extends React.Component<Iprops, Istate> {
 
         socket.on('connect', () => {
             console.log("Socket Connected");
-            this.getPokeTweet();
+            socket.emit("search", this.props.match.params.name);
             socket.on("tweets", (data:any) => {
                 let newList = [data].concat(this.state.liveTweetList.slice(0, 15));
                 this.setState({ liveTweetList: newList });

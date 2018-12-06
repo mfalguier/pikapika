@@ -13,6 +13,7 @@ module.exports = (app, io) => {
 
 
     const stream = (search) => {
+        console.log("search text", search);
         twitter.stream('statuses/filter', { track: search }, (stream) => {
             stream.on('data', (tweet) => {
                 sendMessage(tweet);
@@ -28,13 +29,11 @@ module.exports = (app, io) => {
     //socket connection.
     io.on("connection", socket => {
         socketConnection = socket;
-        app.post('/setPokeSearch', (req) => {
-            let search = req.body.search;
-            console.log("search", search);
+        socketConnection.on("search", (search)=>{
             if(twitterStream)
                 twitterStream.destroy();
             stream(search);
-        });
+        })
     });
 
     /**
